@@ -48,50 +48,12 @@ async def on_message(message):
             break
 
     for action in all_actions:
-        if action.should_respond(message):
-            response = action.respond(message)
-            await message.channel.send(response)
-            send_message(message.channel.name, response)
+        if action.should_respond(message, client):
+            response, do = action.do_action(message, client)
+            if do:
+                await message.channel.send(response)
+                sent_message(message.channel.name, response)
             break
-   
-    """
-    elif client.user.mentioned_in(message) and "gay" in message.content.lower():
-
-        response = message.author.mention + " lol bye"
-        await message.channel.send(response)
-        send_message(message.channel.name, response)
-        await asyncio.sleep(5)
-
-        try:
-
-            await message.author.create_dm()
-            await message.author.dm_channel.send("you are stupid")
-            await message.author.dm_channel.send("you should be sent a new link to the server, if not just search for another link or ask some one to dend you a link")
-            link = await main_channel.create_invite(max_age=300, max_uses=1, reason="kicked him for the lolz")
-            await message.author.dm_channel.send("Here is a 1 time use invite link: " + link.url)
-            await message.author.kick()
-            print("kicking " + message.author.name + " for the lolz")
-
-        except:
-            pass
-
-    # if someone @ the bot
-    elif client.user.mentioned_in(message) and message.content == "<@!" + str(client.user.id) + ">":
-        response = message.author.mention + " what"
-        await message.channel.send(response)
-        send_message(message.channel.name, response)
-
-    # if someone @ the bot and says: "wow"
-    elif client.user.mentioned_in(message) and (message.content.replace(" ", "").replace("<@!" + str(client.user.id) + ">", '') == "wow"):
-        response = '''וווואווווווווו😱😱😱😱😱
-אתם לא מאמינים זה אשכרה עובד!!! אם תגידו את המשפט שכתוב פה למטה שלוש פעמים ותשתפו לחמש קבוצות אתם לא תאמינו מה קורה!!!!!!!!!!!!!!!! האייקון של הדיסקורד יהפוך לאדום‼️‼️‼️‼️
-
-אַשְהַדֻ אַן לַא אִלָהַ אִלַּא אללָּה וַאַן מֻחַמַּדַ(ן) רַסוּלֻ אללָּה.
-
-כדאי לכם ממממשששש לנסות לי זה עבד וזה ממש מגניבב🤭🤭🤭'''
-        await message.channel.send(response)
-        send_message(message.channel.name, response)
-        """
 
 # when someone joins a server
 @client.event
@@ -106,10 +68,10 @@ async def on_member_join(member):
     main_channel = client.get_channel(MAIN_CHANNEL_ID)
     print(main_channel, main_channel.id)
     await main_channel.send(response)
-    send_message(main_channel.name, response)
+    sent_message(main_channel.name, response)
 
 
-def send_message(channel_name, response):
+def sent_message(channel_name, response):
     print("Sent message @ " + channel_name + ' that says "' + response + '"')
 
 
