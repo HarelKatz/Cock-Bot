@@ -11,6 +11,10 @@ class GayKickAction(Action):
     def __init__(self):
         super().__init__("")
 
+    def __sent_message(self, channel_name, response):
+        print("Sent message @ " + channel_name +
+              ' that says "' + response + '"')
+
     def should_respond(self, message, client):
         return client.user.mentioned_in(message) and "gay" in message.content.lower()
 
@@ -18,25 +22,21 @@ class GayKickAction(Action):
 
         response = message.author.mention + " lol bye"
         await message.channel.send(response)
-        __sent_message(message.channel.name, response)
+        self.__sent_message(message.channel.name, response)
         await asyncio.sleep(5)
 
-        try:
+        # try:
 
-            main_channel = client.get_channel(MAIN_CHANNEL_ID)
-            await message.author.create_dm()
-            await message.author.dm_channel.send("you are stupid")
-            await message.author.dm_channel.send("you should be sent a new link to the server, if not just search for another link or ask some one to dend you a link")
-            link = await main_channel.create_invite(max_age=300, max_uses=1, reason="kicked him for the lolz")
-            await message.author.dm_channel.send("Here is a 1 time use invite link: " + link.url)
-            await message.author.kick()
-            print("kicking " + message.author.name + " for the lolz")
+        main_channel = client.get_channel(MAIN_CHANNEL_ID)
+        await message.author.create_dm()
+        await message.author.dm_channel.send("you are stupid")
+        await message.author.dm_channel.send("you should be sent a new link to the server, if not just search for another link or ask some one to dend you a link")
+        link = await main_channel.create_invite(max_age=300, max_uses=1, reason="kicked him for the lolz")
+        await message.author.dm_channel.send("Here is a 1 time use invite link: " + link.url)
+        await message.author.kick()
+        print("kicking " + message.author.name + " for the lolz")
 
-        except:
-            pass
+        # except:
+        # pass
 
-        return message, False
-
-    def __sent_message(self, channel_name, response):
-        print("Sent message @ " + channel_name +
-              ' that says "' + response + '"')
+        return message.content, False

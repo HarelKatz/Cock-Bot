@@ -13,7 +13,7 @@ class WowAction(Action):
         super().__init__("")
 
     def should_respond(self, message, client):
-        return client.user.mentioned_in(message) and message.content == "<@!" + str(client.user.id) + ">"
+        return client.user.mentioned_in(message) and message.content.replace(" ", "").replace("<@!" + str(client.user.id) + ">", '') == "wow"
 
-    def do_action(self, message, client):
+    async def do_action(self, message, client):
         return response, True
