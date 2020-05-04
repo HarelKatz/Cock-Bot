@@ -7,5 +7,5 @@ class BotzerAction(Action):
     def __init__(self):
         super().__init__("botzer")
 
-    def respond(self, message, client):
+    def do_action(self, message, client):
         return message.author.mention + " BOTZER" * BOTZER_REPEAT, True
