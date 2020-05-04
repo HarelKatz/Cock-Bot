@@ -49,7 +49,7 @@ async def on_message(message):
 
     for action in all_actions:
         if action.should_respond(message, client):
-            response, do = action.do_action(message, client)
+            response, do = await action.do_action(message, client)
             if do:
                 await message.channel.send(response)
                 sent_message(message.channel.name, response)

@@ -9,5 +9,5 @@ class SmallDickAction(Action):
     def should_respond(self, message, client):
         return all(word in message.content.lower() for word in self.triggers)
 
-    def do_action(self, message, client):
+    async def do_action(self, message, client):
         return message.author.mention + " dick's is small", True
