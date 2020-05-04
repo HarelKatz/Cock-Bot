@@ -8,7 +8,7 @@ response = '''וווואווווווווו😱😱😱😱😱
 כדאי לכם ממממשששש לנסות לי זה עבד וזה ממש מגניבב🤭🤭🤭'''
 
 
-class SmallDickAction(Action):
+class WowAction(Action):
     def __init__(self):
         super().__init__("")
 

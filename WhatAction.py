@@ -1,7 +1,7 @@
 from Action import *
 
 
-class SmallDickAction(Action):
+class WhatAction(Action):
     def __init__(self):
         super().__init__("")
 
