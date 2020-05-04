@@ -6,6 +6,8 @@ import asyncio
 import discord
 from dotenv import load_dotenv
 
+from Actions import *
+
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
@@ -45,41 +47,19 @@ async def on_message(message):
             main_channel = i
             break
 
-    if message.content == '99!':
-
-        brooklyn_99_quotes = [
-            'I\'m the human form of the 💯 emoji.',
-            'Bingpot!',
-            (
-                'Cool. Cool cool cool cool cool cool cool, '
-                'no doubt no doubt no doubt no doubt.'
-            ),
-        ]
-        response = random.choice(brooklyn_99_quotes)
-        await message.channel.send(response)
-        sent_message(message.channel.name, response)
-
-    elif 'my cock' in message.content.lower():
-
-        response = message.author.mention + " Nice cock bro"
-        await message.channel.send(response)
-        sent_message(message.channel.name, response)
-
-    elif all(word in message.content.lower() for word in ["your", "dick", "small"]):
-
-        response = message.author.mention + " dick's is small"
-        await message.channel.send(response)
-        sent_message(message.channel.name, response)
-
-        response = message.author.mention + " Yes, your dick is small"
-        await message.channel.send(response)
-        sent_message(message.channel.name, response)
-
+    for action in all_actions:
+        if action.should_respond(message):
+            response = action.respond(message)
+            await message.channel.send(response)
+            send_message(message.channel.name, response)
+            break
+   
+    """
     elif client.user.mentioned_in(message) and "gay" in message.content.lower():
 
         response = message.author.mention + " lol bye"
         await message.channel.send(response)
-        sent_message(message.channel.name, response)
+        send_message(message.channel.name, response)
         await asyncio.sleep(5)
 
         try:
@@ -98,7 +78,7 @@ async def on_message(message):
     elif client.user.mentioned_in(message) and message.content == "<@!" + str(client.user.id) + ">":
         response = message.author.mention + " what"
         await message.channel.send(response)
-        sent_message(message.channel.name, response)
+        send_message(message.channel.name, response)
 
     elif client.user.mentioned_in(message) and (message.content.replace(" ", "").replace("<@!" + str(client.user.id) + ">", '') == "wow"):
         response = '''וווואווווווווו😱😱😱😱😱
@@ -108,7 +88,8 @@ async def on_message(message):
 
 כדאי לכם ממממשששש לנסות לי זה עבד וזה ממש מגניבב🤭🤭🤭'''
         await message.channel.send(response)
-        sent_message(message.channel.name, response)
+        send_message(message.channel.name, response)
+        """
 
 
 @client.event
@@ -118,15 +99,15 @@ async def on_member_join(member):
         return
 
     response = member.mention + \
-        " Nice to see you hear, if you are a girl **GET OUT** if not nice ding dong bro"
+        " Nice to see you here, if you are a girl **GET OUT** if not nice, ding dong bro"
 
     main_channel = client.get_channel(MAIN_CHANNEL_ID)
     print(main_channel, main_channel.id)
     await main_channel.send(response)
-    sent_message(main_channel.name, response)
+    send_message(main_channel.name, response)
 
 
-def sent_message(channel_name, response):
+def send_message(channel_name, response):
     print("Sent message @ " + channel_name + ' that says "' + response + '"')
 
 
