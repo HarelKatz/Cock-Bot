@@ -1,10 +1,9 @@
-# bot.py
 import os
 import random
 import asyncio
 
-import discord
-from dotenv import load_dotenv
+import discord  # pip install discord
+from dotenv import load_dotenv  # pip install python-dotenv
 
 from Actions import *
 
@@ -17,7 +16,7 @@ MAIN_CHANNEL_ID = int(os.getenv('MAIN_CHANNEL_ID'))
 
 client = discord.Client()
 
-
+# when the bot is started
 @client.event
 async def on_ready():
 
@@ -33,10 +32,11 @@ async def on_ready():
     members = '\n - '.join([member.name for member in guild.members])
     print(f'Guild Members:\n - {members}')
 
-
+# when someone send a message in chat
 @client.event
 async def on_message(message):
 
+    # if the message is the bot's message or he recives a message in the DMs
     if message.author == client.user or message.guild == None:
         return
 
@@ -75,11 +75,13 @@ async def on_message(message):
         except:
             pass
 
+    # if someone @ the bot
     elif client.user.mentioned_in(message) and message.content == "<@!" + str(client.user.id) + ">":
         response = message.author.mention + " what"
         await message.channel.send(response)
         send_message(message.channel.name, response)
 
+    # if someone @ the bot and says: "wow"
     elif client.user.mentioned_in(message) and (message.content.replace(" ", "").replace("<@!" + str(client.user.id) + ">", '') == "wow"):
         response = '''וווואווווווווו😱😱😱😱😱
 אתם לא מאמינים זה אשכרה עובד!!! אם תגידו את המשפט שכתוב פה למטה שלוש פעמים ותשתפו לחמש קבוצות אתם לא תאמינו מה קורה!!!!!!!!!!!!!!!! האייקון של הדיסקורד יהפוך לאדום‼️‼️‼️‼️
@@ -91,7 +93,7 @@ async def on_message(message):
         send_message(message.channel.name, response)
         """
 
-
+# when someone joins a server
 @client.event
 async def on_member_join(member):
 
