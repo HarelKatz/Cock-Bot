@@ -18,7 +18,7 @@ class GayKickAction(Action):
     def should_respond(self, message, client):
         return client.user.mentioned_in(message) and "gay" in message.content.lower()
 
-    async def do_action(self, message, client):
+    async def do_action(self, message, client, discord):
 
         response = message.author.mention + " lol bye"
         await message.channel.send(response)

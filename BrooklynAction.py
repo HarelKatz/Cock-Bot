@@ -18,5 +18,5 @@ class BrooklynAction(Action):
     def should_respond(self, message, client):
         return self._trigger == message.content.lower()
 
-    async def do_action(self, message, client):
+    async def do_action(self, message, client, discord):
         return random.choice(BROOKLYN_99_QUOTES), True

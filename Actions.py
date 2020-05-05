@@ -5,6 +5,7 @@ from BotzerAction import *
 from GayKickAction import *
 from WhatAction import *
 from WowAction import *
+from ZikukimAction import *
 
 
 all_actions = [
@@ -14,5 +15,6 @@ all_actions = [
     BotzerAction(),
     GayKickAction(),
     WhatAction(),
-    WowAction()
+    WowAction(),
+    ZikukimAction()
 ]
