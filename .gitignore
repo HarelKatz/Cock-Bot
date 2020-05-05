@@ -2,7 +2,14 @@
 .vscode
 DiscordBot/
 .env
+
+
 *.aup
+
+
+
+
+
 
 
 
