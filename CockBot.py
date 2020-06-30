@@ -73,7 +73,7 @@ async def on_member_join(member):
 
 
 def sent_message(channel_name, response):
-    print(datetime.now().strftime("%d/%m/%Y %H:%M:%S") + ": Sent message @ " + channel_name + ' that says "' + response + '"')
+    print(datetime.now().strftime("%d/%m/%Y %H:%M:%S") + " : Sent message @ " + channel_name + ' that says "' + response + '"')
 
 
 client.run(TOKEN)
