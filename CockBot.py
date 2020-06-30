@@ -1,7 +1,7 @@
 import os
 import random
 import asyncio
-import datetime
+from datetime import datetime
 
 import discord  # pip install discord
 from dotenv import load_dotenv  # pip install python-dotenv
