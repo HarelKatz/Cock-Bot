@@ -1,6 +1,7 @@
 import os
 import random
 import asyncio
+import datetime
 
 import discord  # pip install discord
 from dotenv import load_dotenv  # pip install python-dotenv
@@ -72,7 +73,7 @@ async def on_member_join(member):
 
 
 def sent_message(channel_name, response):
-    print("Sent message @ " + channel_name + ' that says "' + response + '"')
+    print(datetime.now().strftime("%d/%m/%Y %H:%M:%S") + ": Sent message @ " + channel_name + ' that says "' + response + '"')
 
 
 client.run(TOKEN)
