@@ -10,7 +10,7 @@ class ZikukimAction(Action):
 
         voice = await message.author.voice.channel.connect()
         voice.play(discord.FFmpegPCMAudio(
-            '.\\Misc\\Moshe Perez - Zikukim.mp3'))
+            './Misc/Moshe Perez - Zikukim.mp3'))
         print("Started playing Zikukim @ " + message.author.voice.channel.name)
         counter = 0
         duration = 21   # In seconds
